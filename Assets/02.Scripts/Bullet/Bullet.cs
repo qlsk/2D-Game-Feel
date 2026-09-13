@@ -17,11 +17,15 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            // TODO: HitStop
-            PlayerHit playerHit = other.gameObject.GetComponent<PlayerHit>();
-            playerHit.HitStop(0.3f);
-            CameraShake cameraShake = other.gameObject.GetComponent<CameraShake>();
-            cameraShake.Shake();
+            if (!other.gameObject.CompareTag("Player"))
+            {
+                return;
+            }
+
+            if (other.gameObject.TryGetComponent(out PlayerHit playerHit))
+            {
+                playerHit.Hit();
+            }
             Destroy(gameObject);
         }
     }

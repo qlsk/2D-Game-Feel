@@ -632,7 +632,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -758,18 +758,43 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
+--- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 466dc81df3ce23849a185bde3b2a42c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 3154b746f29ae9449bfcd7ffb8a59d1e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
+  m_EditorClassIdentifier: Assembly-CSharp::CameraShake
+  _shakeTarget: {fileID: 519420032}
+  _shakeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &555893929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,8 +1733,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ff867b72d13f548a3d8abd3f22bd06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHit
-  hitStopToggle: {fileID: 1994796728}
-  hitStopSlider: {fileID: 158356168}
+  _hitStop: {fileID: 1907380864}
+  _hitStopDuration: 1
+  _cameraShake: {fileID: 519420034}
+  _shakeDuration: 1
+  _shakeStrength: 0.12
+  _shakeFrequency: 25
 --- !u!114 &1907380863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1731,13 +1760,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1907380856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3154b746f29ae9449bfcd7ffb8a59d1e, type: 3}
+  m_Script: {fileID: 11500000, guid: d9a99947e14345945bd6733cfa52275a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraShake
-  _mainCamera: {fileID: 519420031}
-  _shakePower: 0.1
-  _shakeRepeatRate: 0.05
-  _shakeDuration: 0.3
+  m_EditorClassIdentifier: Assembly-CSharp::HitStop
 --- !u!1 &1994796726
 GameObject:
   m_ObjectHideFlags: 0

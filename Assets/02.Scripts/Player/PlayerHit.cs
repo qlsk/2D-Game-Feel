@@ -1,32 +1,24 @@
-using System.Collections;
-using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerHit : MonoBehaviour
 {
-    public Toggle hitStopToggle;
-    public Slider hitStopSlider;
-    
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            StartCoroutine(HitStopCoroutine(0.2f));
-        }
-    }
+    [Header("Hit Stop")] [SerializeField] private HitStop _hitStop;
 
-    private IEnumerator HitStopCoroutine(float time)
-    {
-        Time.timeScale = hitStopSlider.value;
-        yield return new WaitForSecondsRealtime(time);
-        Time.timeScale = 1f;
-    }
+    [SerializeField] private float _hitStopDuration = 0.06f;
 
-    public void HitStop(float time)
+    [Header("Camera Shake")] [SerializeField]
+    private CameraShake _cameraShake;
+
+    [SerializeField] private float _shakeDuration = 0.15f;
+
+    [SerializeField] private float _shakeStrength = 0.12f;
+
+    [SerializeField] private float _shakeFrequency = 25f;
+
+    public void Hit()
     {
-        if (hitStopToggle.isOn)
-        {
-            StartCoroutine(HitStopCoroutine(time));
-        }
+        _hitStop.Play(_hitStopDuration);
+
+        _cameraShake.Play(_shakeDuration, _shakeStrength, _shakeFrequency);
     }
 }

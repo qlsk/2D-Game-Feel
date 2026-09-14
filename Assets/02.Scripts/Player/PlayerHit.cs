@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHit : MonoBehaviour
 {
@@ -15,10 +16,19 @@ public class PlayerHit : MonoBehaviour
 
     [SerializeField] private float _shakeFrequency = 25f;
 
+    [SerializeField] private Toggle _hitStopToggle;
+
+    [SerializeField] private Toggle _cameraShakeToggle;
     public void Hit()
     {
-        _hitStop.Play(_hitStopDuration);
+        if (_hitStopToggle.isOn)
+        {
+            _hitStop.Play(_hitStopDuration);
+        }
 
-        _cameraShake.Play(_shakeDuration, _shakeStrength, _shakeFrequency);
+        if (_cameraShakeToggle.isOn)
+        {
+            _cameraShake.Play(_shakeDuration, _shakeStrength, _shakeFrequency);
+        }
     }
 }

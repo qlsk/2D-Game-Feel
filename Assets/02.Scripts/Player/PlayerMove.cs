@@ -1,19 +1,19 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField][Header("캐릭터 이동 속도")] private float _moveSpeed;
-    [SerializeField][Header("지속 점프 세기")] private float _jumpHoldForce;
-    [SerializeField][Header("하강시 중력 값")] private float _fallGravityScale;
-    [SerializeField][Header("최대 점프 높이")] private float _maxJumpBoostHeight;
-    [SerializeField][Header("첫 점프 세기")] private float _jumpImpulse;
+    [SerializeField] [Header("캐릭터 이동 속도")] private float _moveSpeed;
+    [SerializeField] [Header("지속 점프 세기")] private float _jumpHoldForce;
+    [SerializeField] [Header("하강시 중력 값")] private float _fallGravityScale;
+    [SerializeField] [Header("최대 점프 높이")] private float _maxJumpBoostHeight;
+    [SerializeField] [Header("첫 점프 세기")] private float _jumpImpulse;
     private Rigidbody2D _rigidbody;
     private bool _isGrounded;
     private bool _canContinueJump;
     private float _jumpStartY;
+
+    [SerializeField] private Toggle _jumpToggle;
 
     private void Start()
     {
@@ -34,6 +34,19 @@ public class PlayerMove : MonoBehaviour
             transform.Translate(Time.deltaTime * _moveSpeed * Vector3.right);
         }
 
+        if (_jumpToggle.isOn)
+        {
+            Jump();
+        }
+
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            _rigidbody.AddForce(_jumpImpulse * Vector2.up, ForceMode2D.Impulse);
+        }
+    }
+
+    private void Jump()
+    {
         // 점프
         if (Input.GetKeyDown(KeyCode.C) && _isGrounded)
         {

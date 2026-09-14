@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HitStop : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class HitStop : MonoBehaviour
     // 연속으로 HitStop이 호출될 경우 기존 코루틴을 중지하기 위해 사용
     private Coroutine _hitStopCoroutine;
 
+    [SerializeField] private Slider _hitStopSlider;
     // HitStop이 시작되기 전의 Time.timeScale 값을 저장
     // HitStop 종료 후 원래 속도로 복구하기 위해 사용
     private float _originalTimeScale = 1f;
@@ -36,7 +38,7 @@ public class HitStop : MonoBehaviour
     private IEnumerator HitStopCoroutine(float duration)
     {
         // 게임 내 시간 흐름을 정지
-        Time.timeScale = 0f;
+        Time.timeScale = _hitStopSlider.value;
 
         // timeScale의 영향을 받지 않는 실제 시간 기준으로 대기
         // WaitForSeconds를 사용하면 timeScale이 0이기 때문에

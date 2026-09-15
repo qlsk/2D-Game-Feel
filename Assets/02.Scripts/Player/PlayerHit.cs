@@ -19,8 +19,18 @@ public class PlayerHit : MonoBehaviour
     [SerializeField] private Toggle _hitStopToggle;
 
     [SerializeField] private Toggle _cameraShakeToggle;
+
+    private PlayerMove _playerMove;
+    
+    private void Awake()
+    {
+        _playerMove = GetComponent<PlayerMove>();
+    }
+    
     public void Hit()
     {
+        _playerMove.SetCanContinueJump(true);
+        
         if (_hitStopToggle.isOn)
         {
             _hitStop.Play(_hitStopDuration);
@@ -30,5 +40,7 @@ public class PlayerHit : MonoBehaviour
         {
             _cameraShake.Play(_shakeDuration, _shakeStrength, _shakeFrequency);
         }
+        
+        _playerMove.SetCanContinueJump(false);
     }
 }

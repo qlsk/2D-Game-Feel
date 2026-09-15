@@ -13,6 +13,10 @@ public class PlayerMove : MonoBehaviour
     private bool _canContinueJump;
     private float _jumpStartY;
 
+    public void SetCanContinueJump(bool canContinueJump)
+    {
+        _canContinueJump = canContinueJump;
+    }
     [SerializeField] private Toggle _jumpToggle;
 
     private void Start()
@@ -59,7 +63,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 점프키를 누르고 있을 때 + 점프 중일 때 + 현재 점프한 거리가 점프 최대 거리보다 낮을 때
-        if (Input.GetKey(KeyCode.C) && _canContinueJump && (transform.position.y - _jumpStartY < _maxJumpBoostHeight))
+        if (Input.GetKey(KeyCode.C) && !_isGrounded && _canContinueJump && (transform.position.y - _jumpStartY < _maxJumpBoostHeight))
         {
             _rigidbody.AddForce(_jumpHoldForce * Vector2.up, ForceMode2D.Force);
         }

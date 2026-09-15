@@ -29,7 +29,6 @@ public class PlayerHit : MonoBehaviour
     
     public void Hit()
     {
-        _playerMove.SetCanContinueJump(true);
         
         if (_hitStopToggle.isOn)
         {
